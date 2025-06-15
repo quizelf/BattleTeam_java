@@ -48,7 +48,7 @@ public class BattleCraft extends JFrame {
     private boolean isSteveTurn = true;  // 스티브의 턴을 체크하는 변수
     private JLabel lblSteveName;
     private JLabel lblCreeperName;
-    private JTextArea logArea;
+    private static JTextArea logArea;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -63,6 +63,13 @@ public class BattleCraft extends JFrame {
         });
     }
 
+    // 
+    public static void logMessage(String message) {
+        if (logArea != null) {
+            logArea.setText(logArea.getText() + message + "\n");
+        }
+    }
+    
     public BattleCraft() {
         // 기본 설정
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -186,7 +193,7 @@ public class BattleCraft extends JFrame {
     }
 
     private void loadNextMonster() {
-        if (monsterIndex < monsters.length) {
+        if (monsterIndex < monsters.length) { 
             currentMonster = monsters[monsterIndex++];
             lblMonsterName.setText(currentMonster.getName());
             lblMonsterHp.setText("HP: " + currentMonster.getHp());
@@ -202,9 +209,9 @@ public class BattleCraft extends JFrame {
             Image scaled = rawIcon.getImage().getScaledInstance(250, 350, Image.SCALE_SMOOTH);
             lblCreeperName.setIcon(new ImageIcon(scaled)); // 이미지 교체됨!
             
-
             logArea.setText(logArea.getText() + "👾 " + currentMonster.getName() + " 등장! 무기: " + monsterWeapon.getName() + "\n");
-        } else {
+            logArea.append(monsterWeapon.getName() + "의 내구도: " + monsterWeapon.getDurability()+"\n");
+        } else { 
         	ImageIcon clearIcon = new ImageIcon(BattleCraft.class.getResource("/image/DeadCreeper.png"));
             Image clearImg = clearIcon.getImage().getScaledInstance(250, 350, Image.SCALE_SMOOTH);
             lblCreeperName.setIcon(new ImageIcon(clearImg));
@@ -218,6 +225,7 @@ public class BattleCraft extends JFrame {
         if (!isSteveTurn) return;
             steve.attack(currentMonster);
             logArea.setText(logArea.getText() + "⚔ 스티브가 공격! 사용한 무기: "+steve.getWeapon().getName()+"\n");
+            logArea.append(steve.getWeapon().getName() + "의 내구도: " + steve.getWeapon().getDurability()+"\n");
 
             if (currentMonster.getHp() <= 0) {
                 logArea.setText(logArea.getText() + currentMonster.getName() + " 격파!\n\n");
@@ -241,7 +249,7 @@ public class BattleCraft extends JFrame {
                 steve.deactivateAngelCard(); // 상태 해제
             } else {
                 currentMonster.attack(steve);
-                logArea.setText(logArea.getText() + currentMonster.getName() + "의 반격!\n");
+                logArea.setText(logArea.getText() + currentMonster.getName() + "의 반격!\n ");
             }
         	
             updateStatusLabels(); 
@@ -261,10 +269,11 @@ public class BattleCraft extends JFrame {
         }
 
     private void updateStatusLabels() {
-    	if (steve.getWeapon() != null)
+    	if (steve.getWeapon() != null) {
             lblWeapon.setText("무기: " + steve.getWeapon().getName());
+    	}
         else
-            lblWeapon.setText("무기: 없음");
+            lblWeapon.setText("무기: 없음"); 
     	
         lblSteveHp.setText("HP: " + steve.getHp());
         lblMonsterHp.setText("HP: " + currentMonster.getHp());
