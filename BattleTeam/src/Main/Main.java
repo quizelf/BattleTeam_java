@@ -9,7 +9,7 @@ import Weapon.*;
 import Player.Player;
 import Main.BattleCraft;
 
-public class Main {
+public class Main { 
     public static void main(String[] args) {
         // 플레이어 객체 생성
         Steve steve = new Steve();
