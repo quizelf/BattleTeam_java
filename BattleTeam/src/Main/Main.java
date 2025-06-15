@@ -9,7 +9,7 @@ import Weapon.*;
 import Player.Player;
 import Main.BattleCraft;
 
-public class Main { 
+public class Main {
     public static void main(String[] args) {
         // 플레이어 객체 생성
         Steve steve = new Steve();
@@ -37,15 +37,29 @@ public class Main {
             windowGame(steve, monster);
             while (steve.getHp() > 0 && monster.getHp() > 0) {
                 steve.attack(monster);
-                if (monster.getHp() <= 0) break;
+                // if (monster.getHp() <= 0) break;
                 monster.attack(steve);
+                
+                if (steve.getHp() <= 0 && monster.getHp() <= 0) {
+                    System.out.println("둘 다 쓰러졌습니다! 무승부!");
+                    return;
+                } else if (steve.getHp() <= 0) {
+                    System.out.println("스티브가 쓰러졌습니다. 게임 오버!");
+                    return;
+                } else if (monster.getHp() <= 0) {
+                    System.out.println(monster.getName() + "을(를) 쓰러뜨렸습니다!\n");
+                    break;
+                }
+                
             }
+            /*
             if (steve.getHp() <= 0) {
                 System.out.println("스티브가 쓰러졌습니다. 게임 오버!");
                 return;
             } else {
                 System.out.println( monster.getName() + "을(를) 쓰러뜨렸습니다!\n");
             }
+            */
         }
         System.out.println(" 모든 몬스터를 물리쳤습니다. 게임 승리!");
     }
