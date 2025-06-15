@@ -9,7 +9,7 @@ public class Skeleton extends Player {
 
     @Override 
     public void attack(Player target) {
-        if (damageReceivedCount >= 3) {  // 피해를 3번 입을 때마다 공격력 증가
+        if (damageReceivedCount % 3 == 0) {  // 피해를 3번 입을 때마다 공격력 증가
             Random rand = new Random();
             if (rand.nextInt(100) < 20) {  // 20% 확률로 공격력 증가
                 this.setPower(this.getPower() * 3 / 2);  // 공격력 1.5배 증가
