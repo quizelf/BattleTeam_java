@@ -3,7 +3,7 @@ package Weapon;
 public abstract class Weapon {
     private String name;
     private int power;
-    private int durability;  // 내구도
+    private int durability=0;  // 내구도
 
     public Weapon(String name, int power, int durability) {
         this.name = name;
