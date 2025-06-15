@@ -72,15 +72,18 @@ public class Player {
             if (weapon.getName().equals(this.getDefaultWeaponName())) {
                 target.setHp(Math.max(0, target.getHp() - (this.power * 2)));
                 System.out.println("전용 무기로 공격! 공격력 * 2");
+                Main.BattleCraft.logMessage("전용 무기로 공격! 공격력 * 2");
             } else {
                 target.setHp(Math.max(0, target.getHp() - (this.power + weapon.getPower())));
                 weapon.use();  // 내구도 감소
+                System.out.println(weapon.getName() + " 내구도: " + weapon.getDurability());
                 System.out.println("무기로 공격! " + weapon.getName() + " 공격력: " + (this.power + weapon.getPower()));
             }
 
             // 내구도 체크
             if (weapon.getDurability() == 0) {
                 System.out.println(weapon.getName() + "의 내구도가 0이 되어 사용 불가");
+                
             }
             weapon.attackMotion();  // 공격 모션 실행
         } else {
