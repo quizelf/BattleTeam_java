@@ -73,6 +73,7 @@ public class Player {
                 target.setHp(Math.max(0, target.getHp() - (this.power * 2)));
                 System.out.println("전용 무기로 공격! 공격력 * 2");
                 Main.BattleCraft.logMessage("전용 무기로 공격! 공격력 * 2");
+                weapon.use();
             } else {
                 target.setHp(Math.max(0, target.getHp() - (this.power + weapon.getPower())));
                 weapon.use();  // 내구도 감소
