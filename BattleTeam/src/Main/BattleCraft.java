@@ -96,6 +96,7 @@ public class BattleCraft extends JFrame {
         lblMonsterHp = new JLabel("HP");
         lblMonsterHp.setBounds(708, 50, 166, 132);
         contentPane.add(lblMonsterHp);
+        // lblMonsterHp = Math.max(0, lblMonsterHp - damage);
 
         barSteveHp = new JProgressBar();
         barSteveHp.setBounds(133, 111, 146, 14);
@@ -159,7 +160,6 @@ public class BattleCraft extends JFrame {
         scrollPane.setViewportView(logArea); 
         
         
-        
         lblSteveName = new JLabel("");
         lblSteveName.setBounds(45, 135, 211, 341);
         lblSteveName.setIcon(new ImageIcon(BattleCraft.class.getResource("/image/Steveimage.jpg")));
@@ -196,7 +196,7 @@ public class BattleCraft extends JFrame {
         if (monsterIndex < monsters.length) { 
             currentMonster = monsters[monsterIndex++];
             lblMonsterName.setText(currentMonster.getName());
-            lblMonsterHp.setText("HP: " + currentMonster.getHp());
+            lblMonsterHp.setText("HP: " + currentMonster.getHp()); // 
             barMonsterHp.setMaximum(currentMonster.getHp());
             barMonsterHp.setValue(currentMonster.getHp());
 
@@ -268,15 +268,15 @@ public class BattleCraft extends JFrame {
             isSteveTurn = true;
         }
 
-    private void updateStatusLabels() {
+    private void updateStatusLabels() {    	
     	if (steve.getWeapon() != null) {
             lblWeapon.setText("무기: " + steve.getWeapon().getName());
     	}
         else
             lblWeapon.setText("무기: 없음"); 
     	
-        lblSteveHp.setText("HP: " + steve.getHp());
-        lblMonsterHp.setText("HP: " + currentMonster.getHp());
+        lblSteveHp.setText("HP: " + Math.max(0, steve.getHp()));
+        lblMonsterHp.setText("HP: " + Math.max(0, currentMonster.getHp()));
         barSteveHp.setValue(steve.getHp());
         barMonsterHp.setValue(currentMonster.getHp());
     }
